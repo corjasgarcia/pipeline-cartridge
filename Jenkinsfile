@@ -1,6 +1,6 @@
 
 pipeline {
-  agent none
+  agent any
   
   // ** agent { docker 'maven:3-alpine' }
   /* environment{ 
@@ -17,15 +17,15 @@ pipeline {
 
     stages {
         stage('Clone') {
-			agent { label 'master' }
+			
             steps {
                 echo 'Cloning repository'
 				git url: 'https://github.com/Accenture/spring-petclinic.git'
-				stash 'working-copy'
+			
             }
         }
         stage('Build') {
-			agent { label 'master' }
+			
             steps {
 				
                 echo 'Building with Maven'
