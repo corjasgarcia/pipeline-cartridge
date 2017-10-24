@@ -23,7 +23,7 @@ pipeline {
 				
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
-				sh "mvnw clean install -DskipTests"
+				sh "./mvnw clean install -DskipTests"
 				stash 'working-copy'
 				archiveArtifacts artifacts: '**/target/*.war'
 				
@@ -39,7 +39,7 @@ pipeline {
 			steps{
 				unstash 'working-copy'
 				
-				sh "mvnw clean test"
+				sh "./mvnw clean test"
 				
 				stash 'working-copy'
 		}
@@ -52,7 +52,7 @@ pipeline {
 			steps{
 				withSonarQubeEnv('sonarQube5.3') {
 				// ** Para 
-				sh 'mvnw sonar:sonar'
+				sh './mvnw sonar:sonar'
 		}
 		}
 	}
