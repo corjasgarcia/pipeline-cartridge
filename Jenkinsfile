@@ -11,6 +11,7 @@ pipeline {
 
     stages {
         stage('Clone') {
+		
             steps {
                 echo 'Cloning repository'
 				git url: 'https://github.com/Accenture/spring-petclinic.git'
@@ -23,12 +24,13 @@ pipeline {
 				// ** def mvnHome = 'apache-maven-3.5.0'
 				sh "mvn clean install -DskipTests"
 				stash 'working-copy'
+				archiveArtifacts artifacts: '**/target/*.war'
 				
             }
         }
         stage('Deploy') {
             steps {
-				echo 'print variable'
+				echo 'print {$ENV.WORKSPACE} variable'
 				
                 echo 'Deploying....'
             }
