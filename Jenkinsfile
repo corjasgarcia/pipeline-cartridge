@@ -34,5 +34,11 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-    }
+		stage('UnitTestJob'){
+		unstash 'working-copy'
+		sh "mvn clean test"
+		
+		}
+    
+	}
  }
