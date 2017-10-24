@@ -8,7 +8,7 @@ pipeline {
         maven 'apache-maven-3.5.0' 
 		
     }
-
+   // ** agent
 
     stages {
         stage('Clone') {
@@ -53,8 +53,10 @@ pipeline {
 	}
 		stage('SonarQube analysis 2') {
 			steps{
-			// requires SonarQube Scanner 2.8+
-				def scannerHome = tool 'SonarQube Scanner 2.8';
+				script{
+					scannerHome = tool 'SonarQube Scanner 2.8';
+					}
+				// requires SonarQube Scanner 2.8+
 				withSonarQubeEnv('sonarQube5.3') {
 				sh "${scannerHome}/bin/sonar-scanner"
 		}
