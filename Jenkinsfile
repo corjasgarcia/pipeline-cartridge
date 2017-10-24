@@ -1,6 +1,6 @@
 
 pipeline {
-  agent any
+  agent none
   
   // ** agent { docker 'maven:3-alpine' }
   /* environment{ 
@@ -17,13 +17,14 @@ pipeline {
 
     stages {
         stage('Clone') {
-		
+			agent any
             steps {
                 echo 'Cloning repository'
 				git url: 'https://github.com/Accenture/spring-petclinic.git'
             }
         }
         stage('Build') {
+			agent any
             steps {
 				
                 echo 'Building with Maven'
@@ -35,12 +36,14 @@ pipeline {
             }
         }
         stage('Deploy') {
+			agent any
             steps {
 				echo env.WORKSPACE
                 echo 'Deploying....'
             }
         }
 		stage('UnitTestJob'){
+			agent any
 			steps{
 				unstash 'working-copy'
 				
@@ -50,6 +53,7 @@ pipeline {
 		}
 		}
 		stage('SonarQube analysis 1'){
+			agent any
 			
 			// ** Coge las propiedades del pom
 			//** La configuracion viene dada por maven
@@ -62,6 +66,7 @@ pipeline {
 		}
 	}
 		stage('SonarQube analysis 2') {
+			agent any
 			steps{
 				script{
 					scannerHome = tool 'SonarQube Scanner 2.8';
@@ -72,6 +77,23 @@ pipeline {
 		}
     }
   }
-}
- }
+		stage('agent Docker'){
+			agent{
+			
+				docker{
+					image 'tomcat:8.0'
+					args '-v $HOME/.m2:/root/.m2'
+					
+			}
+			}
+			steps{
+				echo 'imprimir la variable env.WORKSPACE'
+			}
+			}
+			
+		}
+  
+  
+  }
+ 
  
