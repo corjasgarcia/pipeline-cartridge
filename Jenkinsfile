@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-				echo 'print variable ${WORKSPACE_DIR} '
+			
 				
                 echo 'Deploying....'
             }
