@@ -1,17 +1,16 @@
 
 pipeline {
   agent any
-  // ** agent { docker 'maven:3-alpine' }
-  // ** environment{ 
-  // ** }
+
   tools { 
         maven 'apache-maven-3.5.0'  
     }
-	environment {
+  environment {
 	 WORKSPACE_DIR = ${env.WORKSPACE}
 	}
 
-    stages {
+   
+  stages {
         stage('Clone') {
             steps {
                 echo 'Cloning repository'
