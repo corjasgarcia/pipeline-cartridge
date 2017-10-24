@@ -17,14 +17,14 @@ pipeline {
 
     stages {
         stage('Clone') {
-			agent any
+			agent { label 'master' }
             steps {
                 echo 'Cloning repository'
 				git url: 'https://github.com/Accenture/spring-petclinic.git'
             }
         }
         stage('Build') {
-			agent any
+			agent { label 'master' }
             steps {
 				
                 echo 'Building with Maven'
@@ -36,14 +36,14 @@ pipeline {
             }
         }
         stage('Deploy') {
-			agent any
+			agent { label 'master' }
             steps {
 				echo env.WORKSPACE
                 echo 'Deploying....'
             }
         }
 		stage('UnitTestJob'){
-			agent any
+			agent { label 'master' }
 			steps{
 				unstash 'working-copy'
 				
@@ -53,7 +53,7 @@ pipeline {
 		}
 		}
 		stage('SonarQube analysis 1'){
-			agent any
+			agent { label 'master' }
 			
 			// ** Coge las propiedades del pom
 			//** La configuracion viene dada por maven
@@ -66,7 +66,7 @@ pipeline {
 		}
 	}
 		stage('SonarQube analysis 2') {
-			agent any
+			agent { label 'master' }
 			steps{
 				script{
 					scannerHome = tool 'SonarQube Scanner 2.8';
