@@ -2,9 +2,8 @@
 pipeline {
  node{
  
-  environment{
-  ##Se declaran las environment_variables
-  }
+  // ** environment{ 
+  // ** }
   // **tools { 
   // **      maven 'apache-maven-3.5.0'  
   // **    }
