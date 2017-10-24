@@ -35,9 +35,10 @@ pipeline {
             }
         }
 		stage('UnitTestJob'){
-		unstash 'working-copy'
-		sh "mvn clean test"
-		
+			steps{
+				unstash 'working-copy'
+				sh "mvn clean test"
+		}
 		}
     
 	}
