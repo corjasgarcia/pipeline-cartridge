@@ -44,12 +44,22 @@ pipeline {
 				stash 'working-copy'
 		}
 		}
-		stage('Test with SonarQube'){
+		stage('SonarQube analysis 1'){
 			steps{
 				withSonarQubeEnv('sonarQube5.3') {
 				sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
 		}
 		}
 	}
+		stage('SonarQube analysis 2') {
+			steps{
+			// requires SonarQube Scanner 2.8+
+				def scannerHome = tool 'SonarQube Scanner 2.8';
+				withSonarQubeEnv('sonarQube5.3') {
+				sh "${scannerHome}/bin/sonar-scanner"
+		}
+    }
+  }
+}
  }
- }
+ 
