@@ -4,10 +4,10 @@ pipeline {
   // ** agent { docker 'maven:3-alpine' }
   // ** environment{ 
   // ** }
-  tools { 
-        maven 'apache-maven-3.5.0' 
+  //** tools { 
+  //**      maven 'apache-maven-3.5.0' 
 		
-    }
+  //  }
    // ** agent
 
     stages {
@@ -23,7 +23,7 @@ pipeline {
 				
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
-				sh "mvn clean install -DskipTests"
+				sh "mvnw clean install -DskipTests"
 				stash 'working-copy'
 				archiveArtifacts artifacts: '**/target/*.war'
 				
@@ -39,15 +39,20 @@ pipeline {
 			steps{
 				unstash 'working-copy'
 				
-				sh "mvn clean test"
+				sh "mvnw clean test"
 				
 				stash 'working-copy'
 		}
 		}
 		stage('SonarQube analysis 1'){
+			
+			// ** Coge las propiedades del pom
+			//** La configuracion viene dada por maven
+			
 			steps{
 				withSonarQubeEnv('sonarQube5.3') {
-				sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+				// ** Para 
+				sh 'mvnw sonar:sonar'
 		}
 		}
 	}
