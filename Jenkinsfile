@@ -21,6 +21,7 @@ pipeline {
             steps {
                 echo 'Cloning repository'
 				git url: 'https://github.com/Accenture/spring-petclinic.git'
+				stash 'working-copy'
             }
         }
         stage('Build') {
