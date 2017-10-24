@@ -7,9 +7,7 @@ pipeline {
   tools { 
         maven 'apache-maven-3.5.0'  
     }
-	environment {
-	
-	}
+
 
     stages {
         stage('Clone') {
