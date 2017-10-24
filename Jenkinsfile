@@ -1,7 +1,7 @@
 
 pipeline {
   agent any
- 
+  // ** agent { docker 'maven:3-alpine' }
   // ** environment{ 
   // ** }
   // **tools { 
@@ -19,7 +19,7 @@ pipeline {
             steps {
 				
                 echo 'Building with Maven'
-				def mvnHome = tool 'apache-maven-3.5.0'
+				def mvnHome = 'apache-maven-3.5.0'
 				sh "${mvnHome}/bin/mvn clean install -DskipTests"
 				stash 'working-copy'
 				
