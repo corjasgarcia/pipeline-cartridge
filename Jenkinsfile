@@ -5,7 +5,8 @@ pipeline {
   // ** environment{ 
   // ** }
   tools { 
-        maven 'apache-maven-3.5.0'  
+        maven 'apache-maven-3.5.0' 
+		
     }
 
 
@@ -37,9 +38,17 @@ pipeline {
 		stage('UnitTestJob'){
 			steps{
 				unstash 'working-copy'
+				
 				sh "mvn clean test"
+				
+				stash 'working-copy'
 		}
 		}
-    
+		stage('Test with SonarQube'){
+			steps{
+				withSonarQubeEnv('SonarQube5.3') {
+				sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+		}
+		}
 	}
  }
