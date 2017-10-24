@@ -7,6 +7,9 @@ pipeline {
   tools { 
         maven 'apache-maven-3.5.0'  
     }
+	environment {
+	WORKSPACE_DIR = env.WORKSPACE
+	}
 
     stages {
         stage('Clone') {
@@ -27,6 +30,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+				echo 'print variable'
+				${WORKSPACE_DIR}
                 echo 'Deploying....'
             }
         }
