@@ -8,7 +8,7 @@ pipeline {
         maven 'apache-maven-3.5.0'  
     }
 	environment {
-	WORKSPACE_DIR = env.WORKSPACE
+	 WORKSPACE_DIR = ${env.WORKSPACE}
 	}
 
     stages {
