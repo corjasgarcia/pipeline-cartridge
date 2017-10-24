@@ -1,14 +1,19 @@
 
 pipeline {
   agent any
+  
   // ** agent { docker 'maven:3-alpine' }
-  // ** environment{ 
-  // ** }
-  //** tools { 
-  //**      maven 'apache-maven-3.5.0' 
-		
-  //  }
-   // ** agent
+  /* environment{ 
+	environmentVariables {
+        env('WORKSPACE_NAME', workspaceFolderName)
+        env('PROJECT_NAME', projectFolderName)
+    }
+  */  
+  /*
+  tools { 
+	maven 'apache-maven-3.5.0' 
+	}agent
+  */
 
     stages {
         stage('Clone') {
