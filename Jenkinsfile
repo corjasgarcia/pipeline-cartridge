@@ -1,6 +1,6 @@
 
 pipeline {
- node{
+  agent any
  
   // ** environment{ 
   // ** }
@@ -32,4 +32,3 @@ pipeline {
         }
     }
  }
-}
