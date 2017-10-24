@@ -4,9 +4,9 @@ pipeline {
   // ** agent { docker 'maven:3-alpine' }
   // ** environment{ 
   // ** }
-  // **tools { 
-  // **      maven 'apache-maven-3.5.0'  
-  // **    }
+  tools { 
+        maven 'apache-maven-3.5.0'  
+    }
 
     stages {
         stage('Clone') {
@@ -19,8 +19,8 @@ pipeline {
             steps {
 				
                 echo 'Building with Maven'
-				def mvnHome = 'apache-maven-3.5.0'
-				sh "${mvnHome}/bin/mvn clean install -DskipTests"
+				// ** def mvnHome = 'apache-maven-3.5.0'
+				sh "mvn clean install -DskipTests"
 				stash 'working-copy'
 				
             }
