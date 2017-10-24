@@ -30,8 +30,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-				echo 'print {$ENV.WORKSPACE} variable'
-				
+				echo env.WORKSPACE
                 echo 'Deploying....'
             }
         }
