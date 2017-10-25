@@ -38,6 +38,7 @@ pipeline {
 				
             }
         }
+		/*
         stage('Deploy') {
 			//agent { label 'master' }
             steps {
@@ -80,6 +81,7 @@ pipeline {
 		}
     }
   }
+  */
 		stage('agent Docker'){
 		
 			
