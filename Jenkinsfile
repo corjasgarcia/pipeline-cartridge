@@ -37,7 +37,7 @@ pipeline {
 			
             steps {
 				dir('RepoOne'){
-				sh "ls"
+				//sh "ls"
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
 				sh "./mvnw clean install -DskipTests"
