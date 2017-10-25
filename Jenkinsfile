@@ -37,9 +37,10 @@ pipeline {
 			
             steps {
 				dir('RepoOne'){
+				sh "ll"
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
-				sh "mvnw clean install -DskipTests"
+				sh "./mvnw clean install -DskipTests"
 				//stash 'working-copy'
 				// archiveArtifacts artifacts: '**/target/*.war'
 				//stash includes: '**/target/*.war', name: 'war-file'
