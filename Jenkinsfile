@@ -36,14 +36,14 @@ pipeline {
         stage('Build') {
 			
             steps {
-				
+				dir(RepoOne){
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
-				sh "RepoOne/mvnw clean install -DskipTests"
+				sh "mvnw clean install -DskipTests"
 				//stash 'working-copy'
 				// archiveArtifacts artifacts: '**/target/*.war'
 				//stash includes: '**/target/*.war', name: 'war-file'
-				
+				}
             }
         }
 		/*
