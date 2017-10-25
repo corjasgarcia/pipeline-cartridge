@@ -91,9 +91,9 @@ pipeline {
 				//unstash 'war-file'
 				sh "echo imprimir la variable env.WORKSPACE"
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh "docker cp ${env.WORKSPACE}/target/petclinic.war tomcat:/usr/local/tomcat/webapps/"
+				sh "docker cp /target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/"
 				//"docker restart ${SERVICE_NAME}"
-				sh "docker restart tomcat"
+				sh "docker restart peaceful_ramanujan"
                 //sh "COUNT=1"
 				//sh "while ! curl -q http://${SERVICE_NAME}:8080/petclinic -o /dev/null"
                 //|do
