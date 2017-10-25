@@ -88,7 +88,7 @@ pipeline {
 			steps{
 				sh "echo imprimir la variable env.WORKSPACE"
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh "docker cp ${env.WORKSPACE}/target/petclinic.war  tomcat:/usr/local/tomcat/webapps/"
+				sh "docker cp petclinic.war  tomcat:/usr/local/tomcat/webapps/"
 				//"docker restart ${SERVICE_NAME}"
 				sh "docker restart ${SERVICE_NAME}"
                 //sh "COUNT=1"
