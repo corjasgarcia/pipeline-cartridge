@@ -35,6 +35,7 @@ pipeline {
 				sh "./mvnw clean install -DskipTests"
 				stash 'working-copy'
 				archiveArtifacts artifacts: '**/target/*.war'
+				stash includes: '**/target/*.war', name: 'war-file'
 				
             }
         }
@@ -86,12 +87,13 @@ pipeline {
 		
 			
 			steps{
-				unstash includes: '**/target/*.war', name: 'working-copy'
+				
+				unstash 'war-file'
 				sh "echo imprimir la variable env.WORKSPACE"
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
 				sh "docker cp petclinic.war  tomcat:/usr/local/tomcat/webapps/"
 				//"docker restart ${SERVICE_NAME}"
-				sh "docker restart ${SERVICE_NAME}"
+				sh "docker restart tomcat"
                 //sh "COUNT=1"
 				//sh "while ! curl -q http://${SERVICE_NAME}:8080/petclinic -o /dev/null"
                 //|do
