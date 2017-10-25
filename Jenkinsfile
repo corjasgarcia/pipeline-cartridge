@@ -89,25 +89,26 @@ pipeline {
 			steps{
 				
 				//unstash 'war-file'
-				sh "echo imprimir la variable env.WORKSPACE"
+				 sh '''COLOR=${COLOR}
+						echo $COLOR'''
+				
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh "docker cp ./target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/"
+				sh '''docker cp ./target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/
 				//"docker restart ${SERVICE_NAME}"
-				sh "docker restart peaceful_ramanujan"
-                //sh "COUNT=1"
-				//sh "while ! curl -q http://${SERVICE_NAME}:8080/petclinic -o /dev/null"
-                //|do
-            /*
-			|  if [ ${COUNT} -gt 10 ]; then
-            |    echo "Docker build failed even after ${COUNT}. Please investigate."
-            |    exit 1
-            |  fi
-            |  echo "Application is not up yet. Retrying ..Attempt (${COUNT})"
-            |  sleep 5
-            |  COUNT=$((COUNT+1))
-            |done
-				sh "${scannerHome}/bin/sonar-scanner"
-			*/		
+				      docker restart peaceful_ramanujan
+                      COUNT=1
+				      while ! curl -q http://${SERVICE_NAME}:8080/petclinic -o /dev/null
+                      do
+					  if [ ${COUNT} -gt 10 ]; then
+                      echo "Docker build failed even after ${COUNT}. Please investigate."
+                      exit 1
+                      fi
+                      echo "Application is not up yet. Retrying ..Attempt (${COUNT})"
+                      sleep 5
+                      COUNT=$((COUNT+1))
+                      done
+				
+					
 				
 				
 			}
