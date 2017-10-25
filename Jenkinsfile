@@ -89,8 +89,7 @@ pipeline {
 			steps{
 				
 				//unstash 'war-file'
-				 sh '''COLOR=${COLOR}
-						echo $COLOR'''
+				
 				
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
 				sh '''docker cp ./target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/
@@ -106,8 +105,8 @@ pipeline {
                       echo "Application is not up yet. Retrying ..Attempt (${COUNT})"
                       sleep 5
                       COUNT=$((COUNT+1))
-                      done
-				
+                      done'''
+						
 					
 				
 				
@@ -118,5 +117,3 @@ pipeline {
   
   }
   }
- 
- 
