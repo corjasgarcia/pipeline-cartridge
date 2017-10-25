@@ -1,6 +1,8 @@
 
 pipeline {
-  agent any
+  agent {
+	  label 'docker'}
+	  
   
   // ** agent { docker 'maven:3-alpine' }
   /* environment{ 
@@ -37,14 +39,14 @@ pipeline {
             }
         }
         stage('Deploy') {
-			agent { label 'master' }
+			//agent { label 'master' }
             steps {
 				echo env.WORKSPACE
                 echo 'Deploying....'
             }
         }
 		stage('UnitTestJob'){
-			agent { label 'master' }
+			//agent { label 'master' }
 			steps{
 				unstash 'working-copy'
 				
@@ -54,7 +56,7 @@ pipeline {
 		}
 		}
 		stage('SonarQube analysis 1'){
-			agent { label 'master' }
+			//agent { label 'master' }
 			
 			// ** Coge las propiedades del pom
 			//** La configuracion viene dada por maven
@@ -67,7 +69,7 @@ pipeline {
 		}
 	}
 		stage('SonarQube analysis 2') {
-			agent { label 'master' }
+			//agent { label 'master' }
 			steps{
 				script{
 					scannerHome = tool 'SonarQube Scanner 2.8';
@@ -79,17 +81,30 @@ pipeline {
     }
   }
 		stage('agent Docker'){
-			agent{
+		
 			
-				docker{
-					image 'tomcat:8.0'
-					args '-v $HOME/.m2:/root/.m2'
-					
-			}
-			}
 			steps{
-				echo 'imprimir la variable env.WORKSPACE'
-			}
+				sh "echo imprimir la variable env.WORKSPACE"
+				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
+				sh "docker cp ${env.WORKSPACE}/target/petclinic.war  tomcat:/usr/local/tomcat/webapps/"
+				//"docker restart ${SERVICE_NAME}"
+				sh "docker restart ${SERVICE_NAME}"
+                //sh "COUNT=1"
+				//sh "while ! curl -q http://${SERVICE_NAME}:8080/petclinic -o /dev/null"
+                //|do
+            /*
+			|  if [ ${COUNT} -gt 10 ]; then
+            |    echo "Docker build failed even after ${COUNT}. Please investigate."
+            |    exit 1
+            |  fi
+            |  echo "Application is not up yet. Retrying ..Attempt (${COUNT})"
+            |  sleep 5
+            |  COUNT=$((COUNT+1))
+            |done
+				sh "${scannerHome}/bin/sonar-scanner"
+			*/		
+				
+				
 			}
 			
 		}
