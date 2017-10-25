@@ -33,9 +33,9 @@ pipeline {
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
 				sh "./mvnw clean install -DskipTests"
-				stash 'working-copy'
-				archiveArtifacts artifacts: '**/target/*.war'
-				stash includes: '**/target/*.war', name: 'war-file'
+				//stash 'working-copy'
+				// archiveArtifacts artifacts: '**/target/*.war'
+				//stash includes: '**/target/*.war', name: 'war-file'
 				
             }
         }
@@ -88,10 +88,10 @@ pipeline {
 			
 			steps{
 				
-				unstash 'war-file'
+				//unstash 'war-file'
 				sh "echo imprimir la variable env.WORKSPACE"
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh "docker cp petclinic.war  tomcat:/usr/local/tomcat/webapps/"
+				sh "docker cp target/petclinic.war  tomcat:/usr/local/tomcat/webapps/"
 				//"docker restart ${SERVICE_NAME}"
 				sh "docker restart tomcat"
                 //sh "COUNT=1"
