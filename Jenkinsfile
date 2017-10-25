@@ -93,10 +93,9 @@ pipeline {
 				
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
 				sh '''docker cp ./target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/
-				//"docker restart ${SERVICE_NAME}"
 				      docker restart peaceful_ramanujan
                       COUNT=1
-				      while ! curl -q http://${SERVICE_NAME}:8080/petclinic -o /dev/null
+				      while ! curl -q http://peaceful_ramanujan:8080/petclinic -o /dev/null
                       do
 					  if [ ${COUNT} -gt 10 ]; then
                       echo "Docker build failed even after ${COUNT}. Please investigate."
