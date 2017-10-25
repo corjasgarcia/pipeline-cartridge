@@ -86,6 +86,7 @@ pipeline {
 		
 			
 			steps{
+				unstash includes: '**/target/*.war', name: 'working-copy'
 				sh "echo imprimir la variable env.WORKSPACE"
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
 				sh "docker cp petclinic.war  tomcat:/usr/local/tomcat/webapps/"
