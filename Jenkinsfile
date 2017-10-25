@@ -22,7 +22,14 @@ pipeline {
 			
             steps {
                 echo 'Cloning repository'
-				git url: 'https://github.com/Accenture/spring-petclinic.git'
+				
+				dir('RepoOne') {
+					git url: 'https://github.com/Accenture/spring-petclinic.git'
+					}
+				dir('RepoTwo') {
+					git url https://github.com/Accenture/adop-cartridge-java-regression-tests.git
+					}
+				
 			
             }
         }
@@ -32,7 +39,7 @@ pipeline {
 				
                 echo 'Building with Maven'
 				// ** def mvnHome = 'apache-maven-3.5.0'
-				sh "./mvnw clean install -DskipTests"
+				sh "./RepoOne/mvnw clean install -DskipTests"
 				//stash 'working-copy'
 				// archiveArtifacts artifacts: '**/target/*.war'
 				//stash includes: '**/target/*.war', name: 'war-file'
@@ -92,7 +99,7 @@ pipeline {
 				
 				
 				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh '''docker cp ./target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/
+				sh '''docker cp ./RepoOne/target/petclinic.war peaceful_ramanujan:/usr/local/tomcat/webapps/
 				      docker restart peaceful_ramanujan
                       COUNT=1
 				      while ! curl -q http://peaceful_ramanujan:8080/petclinic -o /dev/null
