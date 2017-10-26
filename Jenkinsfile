@@ -183,7 +183,8 @@ pipeline {
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
 				'''
 				
-				sh '''mv ${WORKSPACE}/RepoOne/src/test/gatling/* .
+				sh '''pwd
+					  mv ${WORKSPACE}/RepoOne/src/test/gatling/* .
 					  //podemos obtener la ip del contenedor que se crea, justo cuando lo creamos porque es lo que nos devuelve
 					  //export DOCKER_NETWORK_NAME = docker 
 					  //CONTEINER_IP = $(docker inspect --format '{{ .NetworkSettings.Networks.'"$DOCKER_NETWORK_NAME"'.IPAddress }}' ${SERVICE_NAME})
