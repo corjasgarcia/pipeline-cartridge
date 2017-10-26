@@ -162,11 +162,11 @@ pipeline {
 		stage(performanceTestJob){
 		
 			
-			env.JMETER_TESTDIR = "jmeter_dir"
+			
 			
 			steps{
 				
-				
+				env.JMETER_TESTDIR = "jmeter_dir"
 				sh '''
 				if [ -e ../apache-jmeter-2.13.tgz ]; then
             	cp ../apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
