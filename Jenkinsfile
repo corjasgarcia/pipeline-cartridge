@@ -176,7 +176,6 @@ pipeline {
                 cp apache-jmeter-2.13.tgz ../
                 mv apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
 				fi
-				mkdir ${JMETER_TESTDIR}
 				cd ${JMETER_TESTDIR}
 				tar -xf apache-jmeter-2.13.tgz
 				echo 'Changing user defined parameters for jmx file'
