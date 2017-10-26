@@ -127,7 +127,7 @@ pipeline {
 			
 			steps{
 			
-				sh "./RepoOne/mvnw -f ./RepoTwo/pom.xml clean -B test " 
+				sh "./mvn -f ./RepoTwo/pom.xml clean -B test " 
 		
 			}
 		}
