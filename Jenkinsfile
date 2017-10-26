@@ -97,11 +97,13 @@ pipeline {
 			steps{
 				
 				//unstash 'war-file'
+				 script {
+                    env.SERVICE_NAME = "tomcat"
+                }
 				
-				SERVICE_NAME="tomcat"
-				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh '''docker cp ./RepoOne/target/petclinic.war ${SERVICE_NAME}:/usr/local/tomcat/webapps/
-				      docker restart ${SERVICE_NAME}
+				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${env.SERVICE_NAME}:/usr/local/tomcat/webapps/"
+				sh '''docker cp ./RepoOne/target/petclinic.war ${env.SERVICE_NAME}:/usr/local/tomcat/webapps/
+				      docker restart ${env.SERVICE_NAME}
                       COUNT=1
 				      while ! curl -q http://http://52.16.226.150:8888/petclinic -o /dev/null
                       do
@@ -124,8 +126,9 @@ pipeline {
 		
 			
 			steps{
+			
 			sh '''
-			SERVICE_NAME="tomcat"
+			
 			//export SERVICE_NAME="$(echo ${PROJECT_NAME} | tr '/' '_')_${ENVIRONMENT_NAME}"
             //echo "SERVICE_NAME=${SERVICE_NAME}" > env.properties
             
