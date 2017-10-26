@@ -169,6 +169,7 @@ pipeline {
 				
 				
 				sh '''
+				
 				if [ -e ../apache-jmeter-2.13.tgz ]; then
             	cp ../apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
 				else
@@ -176,7 +177,7 @@ pipeline {
                 cp apache-jmeter-2.13.tgz ../
                 mv apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
 				fi
-				cd ${JMETER_TESTDIR}
+				cd ./${JMETER_TESTDIR}
 				tar -xf apache-jmeter-2.13.tgz
 				echo 'Changing user defined parameters for jmx file'
 				sed -i 's/PETCLINIC_HOST_VALUE/'"52.16.226.150"'/g' src/test/jmeter/petclinic_test_plan.jmx
