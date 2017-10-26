@@ -18,11 +18,12 @@ pipeline {
 	*/
     
   
-  /*
-  tools { 
-	maven 'apache-maven-3.5.0' 
-	}agent
-  */
+  
+	tools { 
+		maven 'apache-maven-3.5.0' 
+		ant 'ant'
+		}
+  
 	environment {
 				SERVICE_NAME = "tomcat"
 				APP_URL = "http://52.16.226.150:8888/petclinic"
