@@ -161,9 +161,11 @@ pipeline {
 		*/
 		stage(performanceTestJob){
 		
-		
+			script{
+			def JMETER_TESTDIR = "jmeter_dir"
+			}
 			steps{
-				def JMETER_TESTDIR = "jmeter_dir"
+				
 				
 				sh '''
 				if [ -e ../apache-jmeter-2.13.tgz ]; then
