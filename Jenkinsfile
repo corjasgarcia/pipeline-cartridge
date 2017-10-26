@@ -10,12 +10,13 @@ pipeline {
         env('WORKSPACE_NAME', workspaceFolderName)
         env('PROJECT_NAME', projectFolderName)
     }
+	*/
 	/*
 	parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
     }
 	*/
-  */  
+    
   
   /*
   tools { 
