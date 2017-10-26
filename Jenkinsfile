@@ -169,9 +169,9 @@ pipeline {
 				
 				
 				sh '''
-				if [! -e apache-jmeter-2.13.tgz ]; then
+				//if [! -e apache-jmeter-2.13.tgz ]; then
             	wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
-				fi
+				//fi
 				tar -xf apache-jmeter-2.13.tgz
 				echo 'Changing user defined parameters for jmx file'
 				sed -i 's/PETCLINIC_HOST_VALUE/'"52.16.226.150"'/g' src/test/jmeter/petclinic_test_plan.jmx
