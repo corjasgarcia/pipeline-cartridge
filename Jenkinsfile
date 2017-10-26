@@ -177,10 +177,9 @@ pipeline {
 				sed -i 's/PETCLINIC_HOST_VALUE/'"52.16.226.150"'/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
-				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jm'''			
+				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
+				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
 				'''
-				sh "ant -buildfile apache-jmeter-2.13/extras/build.xml \
-						-Dtestpath='${WORKSPACE}/RepoOne/src/test/jmeter' -Dtest='petclinic_test_plan'"
 				
 		}
 		}
