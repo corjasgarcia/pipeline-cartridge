@@ -5,7 +5,7 @@ pipeline {
 	  
   
   // ** agent { docker 'maven:3-alpine' }
-  /* environment{ 
+	/* environment
 	environmentVariables {
         env('WORKSPACE_NAME', workspaceFolderName)
         env('PROJECT_NAME', projectFolderName)
@@ -183,7 +183,7 @@ pipeline {
 		}
 		}
 		
-		}
+		
 		}
   
   
