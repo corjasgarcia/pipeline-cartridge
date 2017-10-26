@@ -18,6 +18,7 @@ pipeline {
   */
 	environment {
 				SERVICE_NAME = "tomcat"
+				APP_URL = "http://52.16.226.150:8888/petclinic"
 			}
     stages {
         stage('Clone') {
@@ -127,7 +128,7 @@ pipeline {
 			
 			steps{
 				dir('RepoOne'){
-				sh "./mvnw -f ../RepoTwo/pom.xml clean -B test " 
+				sh "./mvnw -f ../RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL}" 
 				}
 			}
 		}
