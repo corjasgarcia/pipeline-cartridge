@@ -16,7 +16,9 @@ pipeline {
 	maven 'apache-maven-3.5.0' 
 	}agent
   */
-
+	environment {
+				SERVICE_NAME = "tomcat"
+			}
     stages {
         stage('Clone') {
 			
@@ -92,18 +94,16 @@ pipeline {
   }
   */
 		stage('agent Docker'){
-		
+			
 			
 			steps{
 				
 				//unstash 'war-file'
-				 script {
-                    env.SERVICE_NAME = "tomcat"
-                }
+				 
 				
-				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${env.SERVICE_NAME}:/usr/local/tomcat/webapps/"
-				sh '''docker cp ./RepoOne/target/petclinic.war ${env.SERVICE_NAME}:/usr/local/tomcat/webapps/
-				      docker restart ${env.SERVICE_NAME}
+				//"docker cp ${env.WORKSPACE}/target/petclinic.war  ${SERVICE_NAME}:/usr/local/tomcat/webapps/"
+				sh '''docker cp ./RepoOne/target/petclinic.war ${SERVICE_NAME}:/usr/local/tomcat/webapps/
+				      docker restart ${SERVICE_NAME}
                       COUNT=1
 				      while ! curl -q http://http://52.16.226.150:8888/petclinic -o /dev/null
                       do
