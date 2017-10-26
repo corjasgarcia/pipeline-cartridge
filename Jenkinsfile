@@ -26,6 +26,7 @@ pipeline {
 	environment {
 				SERVICE_NAME = "tomcat"
 				APP_URL = "http://52.16.226.150:8888/petclinic"
+				JMETER_TESTDIR = "jmeter_dir"
 			}
     stages {
         stage('Clone') {
@@ -166,7 +167,7 @@ pipeline {
 			
 			steps{
 				
-				env.JMETER_TESTDIR = "jmeter_dir"
+				
 				sh '''
 				if [ -e ../apache-jmeter-2.13.tgz ]; then
             	cp ../apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
