@@ -162,7 +162,7 @@ pipeline {
 		stage(performanceTestJob){
 		
 			script{
-			def JMETER_TESTDIR = "jmeter_dir"
+			env.JMETER_TESTDIR = "jmeter_dir"
 			}
 			steps{
 				
