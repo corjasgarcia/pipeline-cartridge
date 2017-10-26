@@ -180,7 +180,7 @@ pipeline {
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jm'''			
 				sh ''' env.TESTPATH='src/test/jmeter'
 				'petclinic_test_plan'
-				
+				'''
 				sh "ant -buildfile apache-jmeter-2.13/extras/build.xml \
 						-Dtestpath='src/test/jmeter' -Dtest='petclinic_test_plan'"
 				
