@@ -105,7 +105,7 @@ pipeline {
 				sh '''docker cp ./RepoOne/target/petclinic.war ${SERVICE_NAME}:/usr/local/tomcat/webapps/
 				      docker restart ${SERVICE_NAME}
                       COUNT=1
-				      while ! curl -q http://http://52.16.226.150:8888/petclinic -o /dev/null
+				      while ! curl -q http://52.16.226.150:8888/petclinic -o /dev/null
                       do
 					  if [ ${COUNT} -gt 10 ]; then
                       echo "Docker build failed even after ${COUNT}. Please investigate."
