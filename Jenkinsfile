@@ -162,7 +162,7 @@ pipeline {
 		stage(performanceTestJob){
 		
 		def JMETER_TESTDIR = "jmeter_dir"
-		
+			steps{
 		
 				sh '''
 				if [ -e ../apache-jmeter-2.13.tgz ]; then
@@ -181,6 +181,7 @@ pipeline {
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jm'''			
 				
+		}
 		}
 		}
 		
