@@ -182,11 +182,7 @@ pipeline {
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
 				'''
-				publishHTML([
-					reportDir: '${WORKSPACE}/RepoOne/src/test/jmeter',
-					reportFiles: 'petclinic_test_plan.html',
-					reportName: 'J Meter Report'
-					])
+				
 				sh '''mv ${WORKSPACE}/RepoOne/src/test/gatling/* .
 					  //podemos obtener la ip del contenedor que se crea, justo cuando lo creamos porque es lo que nos devuelve
 					  //export DOCKER_NETWORK_NAME = docker 
@@ -195,7 +191,11 @@ pipeline {
 					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
 					  mvn gatling:execute
 				   '''
-        
+				publishHTML([
+					reportDir: '${WORKSPACE}/RepoOne/src/test/jmeter',
+					reportFiles: 'petclinic_test_plan.html',
+					reportName: 'J Meter Report'
+					])
 
 				
 					}
