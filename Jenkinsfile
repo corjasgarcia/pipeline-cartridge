@@ -10,7 +10,11 @@ pipeline {
         env('WORKSPACE_NAME', workspaceFolderName)
         env('PROJECT_NAME', projectFolderName)
     }
+	p	arameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+    }
   */  
+  
   /*
   tools { 
 	maven 'apache-maven-3.5.0' 
@@ -94,6 +98,7 @@ pipeline {
     }
   }
   */
+  /*
 		stage('agent Docker'){
 			
 			
@@ -123,7 +128,10 @@ pipeline {
 			}
 			
 		}
-		stage('regression Test'){
+		
+	*/
+		/*
+		stage('regression Test no ZAP'){
 		
 			
 			steps{
@@ -133,7 +141,47 @@ pipeline {
 				
 			}
 		}
+		*/
+		/*
+		stage('regression Test with ZAP'){
 		
+			
+			steps{
+			
+				
+				
+				sh "./mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL}" 
+				
+				
+			}
+		}
+		*/
+		stage(performanceTestJob){
+		
+		def JMETER_TESTDIR = "jmeter_dir"
+		
+		
+				sh '''
+				if [ -e ../apache-jmeter-2.13.tgz ]; then
+            	cp ../apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
+				else
+            	wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
+                cp apache-jmeter-2.13.tgz ../
+                mv apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
+				fi
+				mkdir ${JMETER_TESTDIR}
+				cd ${JMETER_TESTDIR}
+				tar -xf apache-jmeter-2.13.tgz
+				echo 'Changing user defined parameters for jmx file'
+				sed -i 's/PETCLINIC_HOST_VALUE/'"52.16.226.150"'/g' src/test/jmeter/petclinic_test_plan.jmx
+				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
+				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
+				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jm'''			
+				
+		}
+		}
+		
+		}
 		}
   
   
