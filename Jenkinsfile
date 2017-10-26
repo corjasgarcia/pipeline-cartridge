@@ -169,7 +169,7 @@ pipeline {
 				
 				
 				sh '''
-				if [ !-e apache-jmeter-2.13.tgz ]; then
+				if [! -e apache-jmeter-2.13.tgz ]; then
             	wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
 				fi
 				tar -xf apache-jmeter-2.13.tgz
