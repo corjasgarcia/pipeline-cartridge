@@ -182,11 +182,8 @@ pipeline {
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
 				'''
-				publishHTML([allowMissing: false,
-					alwaysLinkToLastBuild: true,
-					keepAll: true,
-					reportDir: 
-					'${WORKSPACE}/RepoOne/src/test/jmeter',
+				publishHTML([
+					reportDir: '${WORKSPACE}/RepoOne/src/test/jmeter',
 					reportFiles: 'petclinic_test_plan.html',
 					reportName: 'J Meter Report'
 					])
