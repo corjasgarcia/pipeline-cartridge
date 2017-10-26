@@ -169,12 +169,6 @@ pipeline {
 				
 				
 				sh '''
-				
-				if [-e apache-jmeter-2.13.tgz ]; then
-            	else 
-				wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
-				fi
-				
 				wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
 				tar -xf apache-jmeter-2.13.tgz
 				echo 'Changing user defined parameters for jmx file'
