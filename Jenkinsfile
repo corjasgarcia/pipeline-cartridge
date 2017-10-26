@@ -169,21 +169,20 @@ pipeline {
 				
 				
 				sh '''
-				
-				if [ -e ../apache-jmeter-2.13.tgz ]; then
-            	cp ../apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
-				else
+				if [! -e apache-jmeter-2.13.tgz ]; then
             	wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
-                cp apache-jmeter-2.13.tgz ../
-                mv apache-jmeter-2.13.tgz ${JMETER_TESTDIR}
 				fi
-				cd ./${JMETER_TESTDIR}
 				tar -xf apache-jmeter-2.13.tgz
 				echo 'Changing user defined parameters for jmx file'
 				sed -i 's/PETCLINIC_HOST_VALUE/'"52.16.226.150"'/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' src/test/jmeter/petclinic_test_plan.jm'''			
+				sh ''' env.TESTPATH='src/test/jmeter'
+				'petclinic_test_plan'
+				
+				sh "ant -buildfile apache-jmeter-2.13/extras/build.xml \
+						-Dtestpath='src/test/jmeter' -Dtest='petclinic_test_plan'"
 				
 		}
 		}
