@@ -28,6 +28,7 @@ pipeline {
 				SERVICE_NAME = "tomcat"
 				APP_URL = "http://52.16.226.150:8888/petclinic"
 				JMETER_TESTDIR = "jmeter_dir"
+				IP = "52.16.226.150"
 			}
     stages {
         stage('Clone') {
@@ -181,6 +182,24 @@ pipeline {
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
 				'''
+				publishHTML([allowMissing: false,
+					alwaysLinkToLastBuild: true,
+					keepAll: true,
+					reportDir: 
+					'${WORKSPACE}/RepoOne/src/test/jmeter',
+					reportFiles: 'petclinic_test_plan.html',
+					reportName: 'J Meter Report'
+					])
+				sh '''mv ${WORKSPACE}/RepoOne/src/test/gatling/* .
+					  //podemos obtener la ip del contenedor que se crea, justo cuando lo creamos porque es lo que nos devuelve
+					  //export DOCKER_NETWORK_NAME = docker 
+					  //CONTEINER_IP = $(docker inspect --format '{{ .NetworkSettings.Networks.'"$DOCKER_NETWORK_NAME"'.IPAddress }}' ${SERVICE_NAME})
+					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
+					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
+					  mvn gatling:execute
+				   '''
+        )
+
 				
 		}
 		}
