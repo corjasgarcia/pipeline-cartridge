@@ -158,7 +158,7 @@ pipeline {
 				APP_URL=http://${IP}:8888/petclinic
 				ZAP_PORT="9090"
 				ZAP_ENABLED='false'
-				./mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL} br.com.softplan.security.zap:zap-maven-plugin:analyze -DtargetUrl=${APP_URL} -DzapPort=${ZAP_PORT} -DshouldRunWithDocker='true'
+				mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL} br.com.softplan.security.zap:zap-maven-plugin:analyze -DtargetUrl=${APP_URL} -DzapPort=${ZAP_PORT} -DshouldRunWithDocker='true'
 				'''
 			
             
