@@ -192,7 +192,7 @@ pipeline {
 				 publishHTML(target: [
 					reportDir : '${WORKSPACE}/RepoOne/src/test/jmeter',
 					reportFiles : 'petclinic_test_plan.html',
-					reportName : 'J Meter Report'
+					reportName : 'J Meter Report',
 					reportName  : 'Demo Report',
 					allowMissing : false,
 					alwaysLinkToLastBuild : true,
