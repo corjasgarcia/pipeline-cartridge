@@ -186,7 +186,7 @@ pipeline {
 				
 				sh '''pwd
 					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
-					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
+					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				   '''
 				 publishHTML(target: [
 					reportDir : 'RepoOne/src/test/jmeter',
@@ -196,7 +196,7 @@ pipeline {
 					alwaysLinkToLastBuild : true,
 					keepAll : true])
 
-				sh "gatlingArchive()"
+				gatlingArchive()
 					}
 		}
 		/*
