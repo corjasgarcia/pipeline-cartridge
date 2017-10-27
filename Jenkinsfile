@@ -192,7 +192,6 @@ pipeline {
 					reportDir : 'RepoOne/src/test/jmeter',
 					reportFiles : 'petclinic_test_plan.html',
 					reportName : 'J Meter Report',
-					reportName  : 'Demo Report',
 					allowMissing : false,
 					alwaysLinkToLastBuild : true,
 					keepAll : true])
