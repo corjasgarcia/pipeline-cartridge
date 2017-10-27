@@ -184,12 +184,10 @@ pipeline {
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
-				'''
-				
-				sh '''pwd
-					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
-					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
-					  ./mvn gatling:execute
+				pwd
+				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
+				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
+				./mvn gatling:execute
 				   '''
 				 publishHTML(target: [
 					reportDir : 'RepoOne/src/test/jmeter',
