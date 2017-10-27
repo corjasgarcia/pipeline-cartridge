@@ -184,15 +184,12 @@ pipeline {
 				'''
 				
 				sh '''pwd
-					  mv ${WORKSPACE}/RepoOne/src/test/gatling/* .
-					  //podemos obtener la ip del contenedor que se crea, justo cuando lo creamos porque es lo que nos devuelve
-					  //export DOCKER_NETWORK_NAME = docker 
-					  //CONTEINER_IP = $(docker inspect --format '{{ .NetworkSettings.Networks.'"$DOCKER_NETWORK_NAME"'.IPAddress }}' ${SERVICE_NAME})
+					  mv ${WORKSPACE}/RepoOne/src/test/gatling/pom.xml .
 					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
 					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
 					  mvn gatling:execute
 				   '''
-				publishHTML([
+				 publishHTML([
 					reportDir: '${WORKSPACE}/RepoOne/src/test/jmeter',
 					reportFiles: 'petclinic_test_plan.html',
 					reportName: 'J Meter Report'
@@ -206,6 +203,5 @@ pipeline {
 		
 		}
   
-  
-  
+
   
