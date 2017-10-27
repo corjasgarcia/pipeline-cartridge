@@ -189,13 +189,15 @@ pipeline {
 					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
 					  mvn gatling:execute
 				   '''
-				 publishHTML([reportName  : 'Demo Report',
-					allowMissing : false,
-					alwaysLinkToLastBuild : true,
-					keepAll : true,
+				 publishHTML(target: [
 					reportDir : '${WORKSPACE}/RepoOne/src/test/jmeter',
 					reportFiles : 'petclinic_test_plan.html',
 					reportName : 'J Meter Report'
+					reportName  : 'Demo Report',
+					allowMissing : false,
+					alwaysLinkToLastBuild : true,
+					keepAll : true,
+					
 					])
 
 				
