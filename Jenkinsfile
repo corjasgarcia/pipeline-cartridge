@@ -196,7 +196,7 @@ pipeline {
 					alwaysLinkToLastBuild : true,
 					keepAll : true])
 
-				sh "gatlingArchive()";
+				sh "gatlingArchive()"
 					}
 		}
 		/*
