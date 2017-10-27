@@ -200,12 +200,14 @@ pipeline {
 				sh "gatlingArchive()";
 					}
 		}
+		/*
 		stage('deployProdA'){
 		}
 		stage('deployProdB'){
 		}
 		
-		}
+		
   
-
+*/
+	}
 }
