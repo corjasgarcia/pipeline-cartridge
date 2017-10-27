@@ -190,6 +190,9 @@ pipeline {
 					  mvn gatling:execute
 				   '''
 				 publishHTML([
+					allowMissing: false,
+					alwaysLinkToLastBuild: true,
+					keepAll: true,
 					reportDir: '${WORKSPACE}/RepoOne/src/test/jmeter',
 					reportFiles: 'petclinic_test_plan.html',
 					reportName: 'J Meter Report'
