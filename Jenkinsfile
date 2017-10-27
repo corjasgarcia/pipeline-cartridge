@@ -40,7 +40,7 @@ pipeline {
 					git url: 'https://github.com/Accenture/spring-petclinic.git'
 					}
 				dir('RepoTwo') {
-					git url:  'https://github.com/Accenture/adop-cartridge-java-regression-tests.git'
+					git url:  'https://github.com/corjasgarcia/adop-cartridge-java-regression-tests.git'
 					}
 				
 			
