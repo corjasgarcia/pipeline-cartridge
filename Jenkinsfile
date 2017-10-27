@@ -149,20 +149,22 @@ pipeline {
 			}
 		}
 		*/
-		/*
+		
 		stage('regression Test with ZAP'){
 		
 			
 			steps{
+				sh '''
+				APP_URL=http://${IP}:8888/petclinic
+				ZAP_PORT="9090"
+				ZAP_ENABLED='false'
+				./mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL} br.com.softplan.security.zap:zap-maven-plugin:analyze -DtargetUrl=${APP_URL} -DzapPort=${ZAP_PORT} -DshouldRunWithDocker='true'' " 
+				'''
 			
-				
-				
-				sh "./mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL}" 
-				
-				
+            
 			}
 		}
-		*/
+		
 		stage('performanceTestJob'){
 		
 			
@@ -187,6 +189,7 @@ pipeline {
 				sh '''pwd
 					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
 					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
+					  ./mvn gatling:execute
 				   '''
 				 publishHTML(target: [
 					reportDir : 'RepoOne/src/test/jmeter',
