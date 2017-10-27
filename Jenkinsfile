@@ -156,7 +156,7 @@ pipeline {
 			steps{
 				sh '''
 				APP_URL=http://${IP}:8888/petclinic
-				//ZAP_PORT="9090"
+				#ZAP_PORT="9090"
 				ZAP_ENABLED='false'
 				ZAP_IP=${IP}
 				mvn -f ./RepoTwo/pom.xml clean -B prepare-package -DPETCLINIC_URL=${APP_URL} -DZAP_ENABLED=${ZAP_ENABLED} -DZAP_IP=${ZAP_IP}
