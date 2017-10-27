@@ -60,7 +60,7 @@ pipeline {
 				}
             }
         }
-		/*
+		
         stage('Deploy') {
 			//agent { label 'master' }
             steps {
@@ -68,6 +68,7 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+		/*
 		stage('UnitTestJob'){
 			//agent { label 'master' }
 			steps{
@@ -104,7 +105,7 @@ pipeline {
     }
   }
   */
-  /*
+
 		stage('agent Docker'){
 			
 			
@@ -135,7 +136,7 @@ pipeline {
 			
 		}
 		
-	*/
+	
 		/*
 		stage('regression Test no ZAP'){
 		
