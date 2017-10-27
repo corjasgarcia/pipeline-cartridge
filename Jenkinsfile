@@ -185,10 +185,9 @@ pipeline {
 				'''
 				
 				sh '''pwd
-					  mv ${WORKSPACE}/RepoOne/src/test/gatling/pom.xml .
-					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/scala/default/RecordedSimulation.scala
-					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/scala/default/RecordedSimulation.scala
-					  mvn gatling:execute
+					  mv '${WORKSPACE}/RepoOne/src/test/gatling/*' .
+					  sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
+					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
 				   '''
 				 publishHTML(target: [
 					reportDir : 'RepoOne/src/test/jmeter',
@@ -202,8 +201,10 @@ pipeline {
 				sh "gatlingArchive()";
 					}
 		}
+		stage('deployProdA'){
 		}
-		
+		stage('deployProdB'){
+		}
 		
 		}
   
