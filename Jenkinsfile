@@ -189,7 +189,7 @@ pipeline {
 					  sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/src/test/scala/default/RecordedSimulation.scala
 					  mvn gatling:execute
 				   '''
-				 publishHTML([reportName  : 'Demo Report'
+				 publishHTML([reportName  : 'Demo Report',
 					allowMissing : false,
 					alwaysLinkToLastBuild : true,
 					keepAll : true,
