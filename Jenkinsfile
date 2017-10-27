@@ -196,9 +196,7 @@ pipeline {
 					reportName  : 'Demo Report',
 					allowMissing : false,
 					alwaysLinkToLastBuild : true,
-					keepAll : true,
-					
-					])
+					keepAll : true])
 
 				
 					}
