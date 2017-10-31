@@ -156,11 +156,12 @@ pipeline {
 			steps{
 				sh '''
 				APP_URL=http://${IP}:8888/petclinic
-				#ZAP_PORT="9090"
-				ZAP_ENABLED='false'
+				ZAP_PORT="8443"
+				ZAP_ENABLED='true'
 				ZAP_IP=${IP}
 				docker run --rm -v /zap/scripts/:/zap/scripts/:ro -p 8443:8443 -i owasp/zap2docker-stable zap.sh -daemon -config api.disablekey=true -config api.incerrordetails=true -config proxy.ip=0.0.0.0 -port 8443
 				#mvn -f ./RepoTwo/pom.xml clean -B prepare-package -DPETCLINIC_URL=${APP_URL} -DZAP_ENABLED=${ZAP_ENABLED} -DZAP_IP=${ZAP_IP}
+				./mvn clean -B test -DPETCLINIC_URL=${APP_URL} -DZAP_IP=${ZAP_IP} -DZAP_PORT=${ZAP_PORT} -DZAP_ENABLED=${ZAP_ENABLED}
 				'''
 			
             
