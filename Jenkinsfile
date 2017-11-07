@@ -107,7 +107,7 @@ pipeline {
 			
 			steps{
 				
-				sh "./mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL}" 
+				sh "mvn -f ./RepoTwo/pom.xml clean -B test -DPETCLINIC_URL=${APP_URL}" 
 				
 				
 			}
