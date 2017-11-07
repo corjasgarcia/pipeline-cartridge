@@ -158,7 +158,7 @@ pipeline {
 				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
 				pwd
 				*/
-				mvn -f ./RepoTwo/pom.xml jmeter:jmeter
+				/*mvn -f ./RepoTwo/pom.xml jmeter:jmeter
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				mvn gatling:execute
@@ -166,8 +166,10 @@ pipeline {
 				/*
 				prueba
 				*/
-				
-				   '''
+				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
+				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
+				mvn gatling:execute
+				 '''
 				 publishHTML(target: [
 					reportDir : 'RepoOne/src/test/jmeter',
 					reportFiles : 'petclinic_test_plan.html',
