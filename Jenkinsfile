@@ -156,7 +156,7 @@ pipeline {
 				pwd
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
-				./mvn gatling:execute
+				mvn gatling:execute
 				   '''
 				 publishHTML(target: [
 					reportDir : 'RepoOne/src/test/jmeter',
