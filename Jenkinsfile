@@ -132,40 +132,41 @@ pipeline {
 			}
 		}
 		*/
+		
 		//In Progress...
 		
 		stage('performanceTestJob'){
 		
 			
 			
+			/*
+				if [ ! -e apache-jmeter-2.13.tgz ]; then
+            	wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
+				fi
+				tar -xf apache-jmeter-2.13.tgz
+				
+				*/
+				/*
+				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
+				pwd
+				*/
 			
 			steps{
 				
 				
 				sh '''
-				/*
-				if [ ! -e apache-jmeter-2.13.tgz ]; then
-            	wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-2.13.tgz
-				fi
-				tar -xf apache-jmeter-2.13.tgz
-				*/
+				
 				echo 'Changing user defined parameters for jmx file'
 				sed -i 's/PETCLINIC_HOST_VALUE/'"52.16.226.150"'/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/PETCLINIC_PORT_VALUE/8888/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
-				/*
-				ant -buildfile apache-jmeter-2.13/extras/build.xml -Dtestpath=${WORKSPACE}/RepoOne/src/test/jmeter -Dtest=petclinic_test_plan
-				pwd
-				*/
-				/*mvn -f ./RepoTwo/pom.xml jmeter:jmeter
+			
+				#mvn -f ./RepoTwo/pom.xml jmeter:jmeter
+				
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				mvn gatling:execute
-				
-				/*
-				prueba
-				*/
 				sed -i "s/###TOKEN_VALID_URL###/http:\\/\\/${IP}:8888/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala 
 				sed -i "s/###TOKEN_RESPONSE_TIME###/10000/g" ${WORKSPACE}/RepoOne/src/test/gatling/src/test/scala/default/RecordedSimulation.scala
 				mvn gatling:execute
