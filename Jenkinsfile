@@ -23,7 +23,7 @@ pipeline {
                 echo 'Cloning repository'
 				
 				dir('RepoOne') {
-					git url: 'https://github.com/Accenture/spring-petclinic.git'
+					git url: 'https://github.com/corjasgarcia/spring-petclinic'
 					}
 				dir('RepoTwo') {
 					git url:  'https://github.com/corjasgarcia/adop-cartridge-java-regression-tests.git'
@@ -153,7 +153,7 @@ pipeline {
 			
 			steps{
 				
-				
+				dir('RepoOne'){
 				sh '''
 				
 				echo 'Changing user defined parameters for jmx file'
@@ -181,6 +181,7 @@ pipeline {
 					keepAll : true])
 
 				gatlingArchive()
+				}
 					}
 		}
 		/*
