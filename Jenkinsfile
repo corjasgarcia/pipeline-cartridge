@@ -162,7 +162,8 @@ pipeline {
 				sed -i 's/CONTEXT_WEB_VALUE/petclinic/g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx
 				sed -i 's/HTTPSampler.path"></HTTPSampler.path">petclinic</g' ${WORKSPACE}/RepoOne/src/test/jmeter/petclinic_test_plan.jmx		
 				
-				mvn jmeter:jmeter -P jmeter-tests
+				mvn verify 
+				#jmeter:jmeter -P jmeter-tests
 				
 				
 				#com.lazerycode.jmeter:jmeter-maven-plugin:jmeter -P jmeter-tests
