@@ -173,7 +173,7 @@ pipeline {
 				mvn -f src/test/gatling/ gatling:execute
 				 '''
 				 publishHTML(target: [
-					reportDir : 'RepoOne/src/test/jmeter',
+					reportDir : 'src/test/jmeter',
 					reportFiles : 'petclinic_test_plan.html',
 					reportName : 'J Meter Report',
 					allowMissing : false,
